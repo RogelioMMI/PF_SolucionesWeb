@@ -35,57 +35,110 @@
                 </li>
               </ul>
           
-              <!-- Zona usuario / admin -->
-              <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          
-                <!-- 1) Usuario NO autenticado -->
-                <li class="nav-item" th:if="${usuarioLogueado == null}">
-                  <a class="nav-link d-flex align-items-center gap-1"
-                    href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
-                    <i class="bi bi-person-circle fs-4"></i>
-                    <i class="bi bi-caret-down-fill"></i>
+              <!-- Acciones de usuario -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+
+        <!-- Usuario NO autenticado -->
+        <li class="nav-item" th:if="${usuarioLogueado == null}">
+          <a class="nav-link d-flex align-items-center gap-2" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+            <i class="bi bi-person-circle fs-5"></i> Iniciar Sesión
+          </a>
+        </li>
+
+        <!-- Cliente autenticado -->
+        <li class="nav-item dropdown" th:if="${usuarioLogueado != null and session.rol == 'cliente'}">
+          <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" id="clienteMenu" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-fill"></i>
+            <span th:text="${usuarioLogueado}">Cliente</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="clienteMenu">
+            <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
+          </ul>
+        </li>
+
+        <!-- Admin autenticado -->
+        <li class="nav-item dropdown" th:if="${usuarioLogueado != null and session.rol == 'admin'}">
+          <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" id="adminMenu" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-shield-lock-fill"></i> Admin
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminMenu">
+            <li><a class="dropdown-item" th:href="@{/admin/inicio}">Panel Admin</a></li>
+            <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
+          </ul>
+        </li>
+
+        <!-- Carrito -->
+        <li class="nav-item ms-3">
+          <a class="btn btn-outline-primary d-flex align-items-center" href="/carrito">
+            <i class="bi bi-cart-fill me-2"></i> Ver Carrito
+            <span class="badge rounded-pill text-bg-primary ms-1" th:text="${cantidadCarrito}">0</span>
+          </a>
+        </li>
+
+        <!-- Favoritos -->
+        <li class="nav-item ms-2">
+          <a class="btn btn-outline-danger d-flex align-items-center" href="/favoritos">
+            <i class="bi bi-heart-fill me-2"></i> Tus Favoritos
+            <span class="badge rounded-pill text-bg-danger ms-1" th:text="${cantidadFavoritos}">0</span>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+                      
+      <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="card shadow border-0 mb-0">
+              <div class="card-header bg-dark text-white text-center">
+                <h3 class="mb-0"><i class="bi bi-person-lock"></i> Iniciar Sesión</h3>
+              </div>
+              <div class="card-body">
+                
+                <div th:if="${errorLogin}" class="alert alert-danger text-center mb-3" th:text="${errorLogin}"></div>
+
+                <form method="post" action="/login">
+                  <div class="mb-3">
+                    <label for="usuario" class="form-label">Usuario</label>
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="bi bi-person"></i></span>
+                      <input type="text" class="form-control" id="usuario" name="usuario" required autofocus>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="contrasena" class="form-label">Contraseña</label>
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                      <input type="password" class="form-control" id="contrasena" name="contrasena" required>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-dark w-100">
+                  <i class="bi bi-box-arrow-in-right"></i> Ingresar
+                </button>
+
+                <button type="button" class="btn btn-dark w-100 mt-2" data-bs-dismiss="modal">
+                  <i class="bi bi-x-circle"></i> Cancelar
+                </button>
+
+                <div class="text-center mt-2">
+                  <a href="/registro" class="btn btn-dark w-100">
+                    <i class="bi bi-person-plus"></i> Regístrate
                   </a>
-                </li>
-          
-                <!-- 2) Cliente autenticado -->
-                <li class="nav-item dropdown" th:if="${usuarioLogueado != null and session.rol == 'cliente'}">
-                  <a class="nav-link dropdown-toggle d-flex align-items-center gap-1"
-                    id="clienteMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-person-fill"></i>
-                    <span th:text="${usuarioLogueado}">Cliente</span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="clienteMenu">
-                    <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
-                  </ul>
-                </li>
-          
-                <!-- 3) Admin autenticado -->
-                <li class="nav-item dropdown" th:if="${usuarioLogueado != null and session.rol == 'admin'}">
-                  <a class="nav-link dropdown-toggle d-flex align-items-center gap-1"
-                    id="adminMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-shield-lock-fill"></i> Admin
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminMenu">
-                    <li><a class="dropdown-item" th:href="@{/admin/inicio}">Panel Admin</a></li>
-                    <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
-                  </ul>
-                </li>
-          
-              </ul>
-          
-              <!-- Carrito y favoritos siempre visibles -->
-              <a class="btn btn-outline-dark d-flex align-items-center ms-3" href="/carrito">
-                <i class="bi-cart-fill me-1"></i>
-                Ver Carrito
-                <span class="badge bg-dark text-white ms-1 rounded-pill" th:text="${cantidadCarrito}">0</span>
-              </a>
-              <a class="btn btn-outline-dark d-flex align-items-center ms-3" href="/favoritos">
-                <i class="bi bi-heart-fill me-2"></i> Favoritos
-                <span class="badge bg-dark text-white ms-1 rounded-pill" th:text="${cantidadFavoritos}">0</span>
-              </a>
+                </div>
+                    </a>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-        </nav>
+        </div>
+      </div>
+      </li>
 
 
         <header class="bg-dark py-5">

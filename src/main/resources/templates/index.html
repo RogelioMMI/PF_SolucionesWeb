@@ -84,17 +84,17 @@
 
         <!-- Carrito -->
         <li class="nav-item ms-3">
-          <a class="btn btn-outline-primary d-flex align-items-center" href="/carrito">
-            <i class="bi bi-cart-fill me-2"></i> Carrito
-            <span class="badge bg-primary text-white ms-2 rounded-pill" th:text="${cantidadCarrito}">0</span>
+          <a class="btn btn-outline-dark d-flex align-items-center" href="/carrito">
+            <i class="bi bi-cart-fill me-2"></i> Ver Carrito
+            <span class="badge bg-dark text-white ms-1 rounded-pill" th:text="${cantidadCarrito}">0</span>
           </a>
         </li>
 
         <!-- Favoritos -->
         <li class="nav-item ms-2">
-          <a class="btn btn-outline-danger d-flex align-items-center" href="/favoritos">
-            <i class="bi bi-heart-fill me-2"></i> Favoritos
-            <span class="badge bg-danger text-white ms-2 rounded-pill" th:text="${cantidadFavoritos}">0</span>
+          <a class="btn btn-outline-dark d-flex align-items-center" href="/favoritos">
+            <i class="bi bi-heart-fill me-2"></i> Tus Favoritos
+            <span class="badge bg-dark text-white ms-1 rounded-pill" th:text="${cantidadFavoritos}">0</span>
           </a>
         </li>
 
@@ -130,11 +130,19 @@
                       <input type="password" class="form-control" id="contrasena" name="contrasena" required>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-dark w-100">Ingresar</button>
-                  <button type="button" class="btn btn-secondary w-100 mt-2" data-bs-dismiss="modal">Cancelar</button>
-                  <div class="text-center mt-2">
-                    <a href="/registro" class="btn btn-secondary w-100">
-                      <i class="bi bi-person-plus"></i> Regístrate
+                  <button type="submit" class="btn btn-dark w-100">
+                  <i class="bi bi-box-arrow-in-right"></i> Ingresar
+                </button>
+
+                <button type="button" class="btn btn-dark w-100 mt-2" data-bs-dismiss="modal">
+                  <i class="bi bi-x-circle"></i> Cancelar
+                </button>
+
+                <div class="text-center mt-2">
+                  <a href="/registro" class="btn btn-dark w-100">
+                    <i class="bi bi-person-plus"></i> Regístrate
+                  </a>
+                </div>
                     </a>
                   </div>
                 </form>

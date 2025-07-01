@@ -12,14 +12,14 @@
     <div class="container px-4 px-lg-5">
         <a class="navbar-brand" href="/">Volver al Inicio</a>
         <div class="d-flex ms-auto">
-            <a class="btn btn-outline-dark d-flex align-items-center" href="/carrito">
+            <a class="btn btn-outline-primary d-flex align-items-center" href="/carrito">
                 <i class="bi-cart-fill me-1"></i>
                     Ver Carrito
-                <span class="badge bg-dark text-white ms-1 rounded-pill" th:text="${cantidadCarrito}">0</span>
+                <span class="badge rounded-pill text-bg-primary ms-1" th:text="${cantidadCarrito}">0</span>
             </a>
-            <a class="btn btn-outline-dark d-flex align-items-center ms-3" href="/favoritos">
+            <a class="btn btn-outline-danger d-flex align-items-center ms-3" href="/favoritos">
                 <i class="bi bi-heart-fill me-2"></i> Favoritos
-                <span class="badge bg-dark text-white ms-1 rounded-pill" th:text="${cantidadFavoritos}">0</span>
+                <span class="badge rounded-pill text-bg-danger ms-1" th:text="${cantidadFavoritos}">0</span>
             </a>
         </div>
     </div>

@@ -1,6 +1,7 @@
 package com.example.demo.model.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -33,7 +34,7 @@ public class Pedido implements Serializable{
     private Double total_pedido;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
-    private List<DetallePedido> detalles;
+    private List<DetallePedido> detalles = new ArrayList<>();
 
     public Long getId() {
         return id;

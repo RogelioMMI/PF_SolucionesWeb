@@ -42,7 +42,7 @@
     <div class="row row-cols-1 row-cols-md-3 g-4" th:if="${not #lists.isEmpty(favoritos)}">
         <div class="col" th:each="producto, iter : ${favoritos}">
             <div class="card h-100 shadow">
-                <img th:src="@{${producto.imagen}}" class="card-img-top" alt="Imagen">
+                <img th:src="@{/imagen/{id}(id=${producto.id})}" class="card-img-top" alt="Imagen">
                 <div class="card-body text-center">
                     <h5 class="card-title" th:text="${producto.nombre}"></h5>
                     <p class="card-text">S/. <span th:text="${producto.precio}"></span></p>
@@ -50,9 +50,8 @@
                 <div class="card-footer text-center">
                     <div class="d-grid gap-2">
                         <form method="post" action="/agregar-al-carrito" class="mb-2">
-                            <input type="hidden" name="nombre" th:value="${producto.nombre}">
-                            <input type="hidden" name="precio" th:value="${producto.precio}">
-                            <input type="hidden" name="imagen" th:value="${producto.imagen}">
+                            <input type="hidden" name="id" th:value="${producto.id}">
+                            <input type="hidden" name="redirect" value="favoritos">
                             <button type="submit" class="btn btn-outline-dark w-100">
                                 <i class="bi bi-cart-plus"></i> Añadir al carrito
                             </button>

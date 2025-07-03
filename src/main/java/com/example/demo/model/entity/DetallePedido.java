@@ -20,15 +20,15 @@ public class DetallePedido implements Serializable{
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Pedido")
+    @JoinColumn(name = "ID_Pedido", nullable = false)
     private Pedido pedido;
     
     @ManyToOne
-    @JoinColumn(name = "ID_Producto")
+    @JoinColumn(name = "ID_Producto", nullable = false)
     private Producto producto;
 
     @Column(name = "cantidad")
-    private Long cantidad;
+    private int cantidad;
 
     @Column(name = "precio_unitario")
     private Double precioUnitario;
@@ -57,11 +57,11 @@ public class DetallePedido implements Serializable{
         this.producto = producto;
     }
 
-    public Long getCantidad() {
+    public int getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(Long cantidad) {
+    public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -72,6 +72,6 @@ public class DetallePedido implements Serializable{
     public void setPrecioUnitario(Double precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
-
+    
     
 }

@@ -11,7 +11,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" th:href="@{/admin/inicio}">Bienvenido Administrador</a>
-      <a class="btn btn-outline-light ms-auto me-2" th:href="@{/admin/inicio}">
+      <a class="btn btn-secondary ms-auto me-2" th:href="@{/admin/inicio}">
         <i class="bi bi-arrow-left-circle"></i> Volver
       </a>
       <a class="btn btn-outline-light" th:href="@{/admin/logout}">
@@ -42,9 +42,9 @@
       <tbody class="text-center">
         <tr th:each="p : ${pedidos}">
           <td th:text="${p.id}">1</td>
-          <td th:text="${p.cliente.nombre}">Juan Pérez</td>
-          <td>S/. <span th:text="${p.totalPedido}">100.00</span></td>
-          <td th:text="${p.estado}">Pendiente</td>
+          <td th:text="${p.cliente.nombre}"></td>
+          <td>S/. <span th:text="${p.total_pedido}"></span></td>
+          <td th:text="${p.estado}"></td>
           <td>
             <a th:href="@{'/admin/pedidos/editar/' + ${p.id}}" class="btn btn-sm btn-warning">
               <i class="bi bi-pencil-square"></i> Editar

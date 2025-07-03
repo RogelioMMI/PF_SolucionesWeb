@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -124,7 +124,6 @@
           </tbody>
         </table>
 
-        <!-- Modal Editar Producto -->
                 <div class="modal fade" id="editarProductoModal" tabindex="-1" aria-labelledby="editarProductoModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content p-0 border-0 bg-transparent">
@@ -184,6 +183,239 @@
           document.getElementById('edit-precio').value = btn.getAttribute('data-precio');
         });
       });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" th:href="@{/admin/inicio}">Bienvenido Administrador de Signus</a>
+        <a class="btn btn-secondary ms-auto me-2" th:href="@{/admin/inicio}">
+          <i class="bi bi-arrow-left-circle"></i> Volver
+        </a>
+        <a class="btn btn-outline-light" href="/admin/logout">
+          <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+        </a>
+      </div>
+    </nav>
+    <div class="container mt-5">
+      <div
+        th:if="${mensaje}"
+        class="alert alert-success alert-dismissible fade show text-center"
+        role="alert"
+      >
+        <i class="bi bi-check-circle-fill"></i>
+        <span th:text="${mensaje}"></span>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Cerrar"
+        ></button>
+      </div>
+      <h2 class="mb-4 text-center">Gestion de Productos e Inventario</h2>
+      <input
+        type="text"
+        id="busqueda"
+        class="form-control mb-3"
+        placeholder="Buscar producto..."
+      />
+
+
+      <div th:if="${respuesta}" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Mensaje:</strong> <span th:text="${respuesta}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <div class="card mb-4">
+      <div class="card-header">
+        Registrar Producto
+        </div>
+      <div class="card-body">
+      <form th:action="@{formulario}" method="post" th:object="${producto}" enctype="multipart/form-data" class="needs-validation" novalidate>
+          <input type="hidden" name="id" th:value="${producto.id}"/>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Nombre</label>
+              <input th:field="*{nombre}" type="text" class="form-control" placeholder="Ingrese nombre" required>
+            <div class="invalid-feedback">
+            Ingrese el nombre del producto.
+            </div>
+            </div>
+            <div class="col-md-6">
+              <label>Stock</label>
+              <input th:field="*{stock}" type="number" class="form-control" placeholder="Ingrese stock" required>
+              <div class="invalid-feedback">
+              Ingrese el stock del producto.
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label>Precio</label>
+              <input th:field="*{precio}" type="number" class="form-control" placeholder="Ingrese precio" required>
+              <div class="invalid-feedback">
+                  Ingrese el precio del producto.
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label>Imagen (JPG, máx. 5MB)</label>
+              <input type="file" name="imagen" class="form-control" accept=".jpg,image/jpeg" required>
+              <div class="invalid-feedback">Ingrese una imagen válida.</div>
+            </div>
+            
+            <div class="col-12 text-center pt-3">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa-solid fa-floppy-disk"></i> Guardar Producto
+            </div>
+                      
+          </div>
+       </form>
+       </div>
+       </div>
+      
+  <table class="table table-bordered table-hover" id="tablaProductos">
+          <thead class="table-dark text-center">
+            <tr>
+              <th>Nombre</th>
+              <th>Stock</th>
+              <th>Precio</th>
+              <th>Imagen</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody class="text-center">
+            <tr th:each="p : ${productos}">
+              <td th:text="${p.nombre}"></td>
+              <td th:text="${p.stock}"></td>
+              <td>S/. <span th:text="${p.precio}"></span></td>
+              <td>
+                <img th:src="@{/imagen/{id}(id=${p.id})}" alt="Imagen producto" class="img-fluid" style="max-width: 100px;">
+              </td>
+              <td>
+                <a
+                  class="btn btn-sm btn-warning btn-editar"
+                  th:attr="data-id=${p.id}, 
+                  data-nombre=${p.nombre}, 
+                  data-stock=${p.stock}, 
+                  data-precio=${p.precio}"
+                  data-bs-toggle="modal" 
+                  data-bs-target="#editarProductoModal"
+                  onclick="abrirModalDesdeData(this)"
+                >
+                  <i class="fa-solid fa-pen-to-square"></i>Editar
+                </a>
+                <a th:href="@{eliminar/}+${p.id}" onclick="return confirm('¿Desea eliminar el producto?')" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i>Eliminar</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Modal Editar Producto -->
+                <div class="modal fade" id="editarProductoModal" tabindex="-1" aria-labelledby="editarProductoModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content p-0 border-0 bg-transparent">
+              <div class="card shadow" style="width: 100%; max-width: 500px; margin: auto;">
+                <div class="card-header bg-dark text-white text-center">
+                  <h3 class="mb-0"><i class="bi bi-pencil-square"></i> Editar Producto</h3>
+                </div>
+                <div class="card-body">
+                  <form id="formEditarProducto" method="post" action="/admin/productos/formulario" enctype="multipart/form-data">
+                    <input type="hidden" id="edit-id" name="id">
+                    <div class="mb-3">
+                      <label class="form-label" for="edit-nombre">Nombre</label>
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-tag"></i></span>
+                        <input type="text" class="form-control" id="edit-nombre" name="nombre" required>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label" for="edit-stock">Stock</label>
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-box-seam"></i></span>
+                        <input type="number" class="form-control" id="edit-stock" name="stock" min="0" required>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label" for="edit-precio">Precio</label>
+                      <div class="input-group">
+                        <span class="input-group-text">S/.</span>
+                        <input type="number" step="0.01" class="form-control" id="edit-precio" name="precio" min="0" required>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label" for="edit-imagen">Imagen (JPG, máx. 5MB)</label>
+                      <input type="file"
+                            class="form-control"
+                            id="edit-imagen"
+                            name="imagen"
+                            accept=".jpg,image/jpeg"
+                            required
+                            onchange="validarImagen(this)">
+                    </div>
+                    <button type="submit" class="btn btn-success w-100 mb-2"><i class="bi bi-save"></i> Guardar Cambios</button>
+                    <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal"><i class="bi bi-arrow-left"></i> Cancelar</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+       <script>
+      document.getElementById('busqueda').addEventListener('keyup', function() {
+        let filtro = this.value.toLowerCase();
+        let filas = document.querySelectorAll('#tablaProductos tbody tr');
+        filas.forEach(function(fila) {
+          let texto = fila.textContent.toLowerCase();
+          fila.style.display = texto.includes(filtro) ? '' : 'none';
+        });
+      });
+
+      document.querySelectorAll('.btn-editar').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.getElementById('edit-id').value = btn.getAttribute('data-id');
+          document.getElementById('edit-nombre').value = btn.getAttribute('data-nombre');
+          document.getElementById('edit-stock').value = btn.getAttribute('data-stock');
+          document.getElementById('edit-precio').value = btn.getAttribute('data-precio');
+        });
+      });
+    </script>
+    <script>
+      function validarImagen(input) {
+          const file = input.files[0];
+          if (file) {
+            const maxSize = 5 * 1024 * 1024; // 5MB
+            const extensionValida = file.type === "image/jpeg";
+
+            if (!extensionValida) {
+              alert("Solo se permiten archivos JPG.");
+              input.value = "";
+              return;
+            }
+
+            if (file.size > maxSize) {
+              alert("La imagen no puede superar los 5MB.");
+              input.value = "";
+            }
+          }
+        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

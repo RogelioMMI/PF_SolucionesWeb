@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
@@ -27,8 +28,9 @@ public class Producto implements Serializable{
     @Column(name = "precio")
     private Double precio;
 
-    @Transient
-    private String imagen;
+    @Lob
+    @Column(name = "imagen", columnDefinition = "MEDIUMLOB")
+    private byte[] imagen;
 
     @Transient
     private int cantidad = 1;
@@ -36,7 +38,7 @@ public class Producto implements Serializable{
     public Producto() {
     }
 
-    public Producto(String nombre, Double precio, String imagen) {
+    public Producto(String nombre, Double precio, byte[] imagen) {
         this.nombre = nombre;
         this.precio = precio;
         this.imagen = imagen;
@@ -74,12 +76,12 @@ public class Producto implements Serializable{
     public void setPrecio(Double precio) {
         this.precio = precio;
     }
-    
-    public String getImagen() {
+
+    public byte[] getImagen() {
         return imagen;
     }
 
-    public void setImagen(String imagen) {
+    public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }
 

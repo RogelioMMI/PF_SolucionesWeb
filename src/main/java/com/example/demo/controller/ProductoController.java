@@ -55,11 +55,17 @@ package com.example.demo.controller;
 
 import com.example.demo.model.entity.Producto;
 import com.example.demo.model.service.IProductoService;
+
+
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import org.springframework.http.HttpHeaders;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -144,4 +150,20 @@ public String guardarProducto(@RequestParam(value = "id", required = false) Long
         flash.addFlashAttribute("respuestaProducto", respuesta);
         return "redirect:/admin/productos/panel";
     }
+
+@GetMapping("/imagen/{id}")
+    @ResponseBody
+    public ResponseEntity<byte[]> mostrarImagen(@PathVariable Long id){
+    Producto producto = productoService.buscarProducto(id);
+    if(producto != null && producto.getImagen() != null){
+        System.out.println("Se encontró la imagen para el producto: " + id);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<>(producto.getImagen(), headers, HttpStatus.OK);
+    } else {
+        System.out.println("NO se encontró imagen para el producto: " + id);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+}
+
 }

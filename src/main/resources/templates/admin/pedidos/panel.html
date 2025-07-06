@@ -46,6 +46,9 @@
           <td>S/. <span th:text="${p.total_pedido}"></span></td>
           <td th:text="${p.estado}"></td>
           <td>
+            <a th:href="@{'/admin/pedidos/detalle/' + ${p.id}}" class="btn btn-sm btn-info">
+              <i class="bi bi-info-circle"></i> Ver Detalle
+            </a>
             <a th:href="@{'/admin/pedidos/editar/' + ${p.id}}" class="btn btn-sm btn-warning">
               <i class="bi bi-pencil-square"></i> Editar
             </a>

@@ -85,16 +85,16 @@
         <!-- Carrito -->
         <li class="nav-item ms-3">
           <a class="btn btn-outline-primary d-flex align-items-center" href="/carrito">
-            <i class="bi bi-cart-fill me-2"></i> Ver Carrito
-            <span class="badge rounded-pill text-bg-primary ms-1" th:text="${cantidadCarrito}">0</span>
+            <i class="bi bi-cart-fill me-2"></i> Carrito
+            <span class="badge bg-primary text-white ms-2 rounded-pill" th:text="${cantidadCarrito}">0</span>
           </a>
         </li>
 
         <!-- Favoritos -->
         <li class="nav-item ms-2">
           <a class="btn btn-outline-danger d-flex align-items-center" href="/favoritos">
-            <i class="bi bi-heart-fill me-2"></i> Tus Favoritos
-            <span class="badge rounded-pill text-bg-danger ms-1" th:text="${cantidadFavoritos}">0</span>
+            <i class="bi bi-heart-fill me-2"></i> Favoritos
+            <span class="badge bg-danger text-white ms-2 rounded-pill" th:text="${cantidadFavoritos}">0</span>
           </a>
         </li>
 
@@ -130,19 +130,11 @@
                       <input type="password" class="form-control" id="contrasena" name="contrasena" required>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-dark w-100">
-                  <i class="bi bi-box-arrow-in-right"></i> Ingresar
-                </button>
-
-                <button type="button" class="btn btn-dark w-100 mt-2" data-bs-dismiss="modal">
-                  <i class="bi bi-x-circle"></i> Cancelar
-                </button>
-
-                <div class="text-center mt-2">
-                  <a href="/registro" class="btn btn-dark w-100">
-                    <i class="bi bi-person-plus"></i> Regístrate
-                  </a>
-                </div>
+                  <button type="submit" class="btn btn-dark w-100">Ingresar</button>
+                  <button type="button" class="btn btn-secondary w-100 mt-2" data-bs-dismiss="modal">Cancelar</button>
+                  <div class="text-center mt-2">
+                    <a href="/registro" class="btn btn-secondary w-100">
+                      <i class="bi bi-person-plus"></i> Regístrate
                     </a>
                   </div>
                 </form>
@@ -459,12 +451,33 @@
                   <i class="bi bi-heart-fill text-danger"></i>
                 </button>
               </form>
+
+              
               
             </div>
           </div>
         </div>
       </div>
 </section>
+<section class="container mt-5">
+  <h2 class="text-center mb-4">Nuestros Productos</h2>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" th:each="producto : ${productos}">
+      <div class="card h-100">
+        <img th:src="@{'/admin/productos/imagen/' + ${producto.id}}" class="card-img-top" alt="Producto" width="150" height="150">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${producto.nombre}">Nombre del producto</h5>
+          <p class="card-text">
+            Precio: S/. <span th:text="${producto.precio}">0.00</span><br>
+            Stock: <span th:text="${producto.stock}">0</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">© 2025 Signus - Todos los derechos reservados</p></div>

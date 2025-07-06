@@ -207,6 +207,8 @@ public class CarritoController {
         List<Producto> carrito = (List<Producto>) session.getAttribute("carrito");
         int cantidad = (carrito != null) ? carrito.size() : 0;
         model.addAttribute("cantidadCarrito", cantidad);
+        model.addAttribute("productos", productoService.cargarProductos());
+        
         return "index";
     }
 

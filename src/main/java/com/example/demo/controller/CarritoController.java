@@ -269,11 +269,17 @@ public class CarritoController {
     @GetMapping("/carrito/finalizar-compra")
     public String finalizarCompra(HttpSession session){
         // Obtener cliente
-        Integer clienteIdInt = (Integer) session.getAttribute("clienteId");
-        if (clienteIdInt == null) {
+        //Integer clienteIdInt = (Integer) session.getAttribute("clienteId");
+        //if (clienteIdInt == null) {
+        //    return "redirect:/login?error=no-cliente";
+        //}
+        //Long clienteId = clienteIdInt.longValue();
+        //Cliente cliente = clienteService.buscarCliente(clienteId);
+        Object idObj = session.getAttribute("clienteId");
+        if (idObj == null) {
             return "redirect:/login?error=no-cliente";
         }
-        Long clienteId = clienteIdInt.longValue();
+        Long clienteId = ((Number) idObj).longValue();
         Cliente cliente = clienteService.buscarCliente(clienteId);
     
         // Crear nuevo pedido

@@ -1,5 +1,9 @@
 package com.example.demo.model.service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +43,26 @@ public class ProductoService implements IProductoService{
 
     @Override
     public String eliminarProducto(Long id) {
-        productoRepository.deleteById(id);
-        return "Se elimino el producto";
+        Producto producto = productoRepository.findById(id).orElse(null);
+        if (producto != null) {
+            String nombreImagen = producto.getImagenNombre();
+            if (nombreImagen != null && !nombreImagen.isEmpty()) {
+                // Ajuste de ruta para tu proyecto
+                Path ruta = Paths.get("src/main/resources/static/assets").resolve(nombreImagen);
+                try {
+                    Files.deleteIfExists(ruta);
+                } catch (IOException e) {
+                    System.err.println("Error eliminando la imagen: " + e.getMessage());
+                }
+            }
+            productoRepository.deleteById(id);
+            return "Se eliminó el producto correctamente";
+        }
+        return "Producto no encontrado";
     }
+
+    
+    
+
 
 }

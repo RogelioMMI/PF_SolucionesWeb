@@ -37,7 +37,7 @@ public class FavoritosController {
     }
 
     boolean yaExiste = favoritos.stream()
-        .anyMatch(p -> p.getNombre().equals(producto.getId()));
+        .anyMatch(p -> p.getId().equals(producto.getId()));
 
     if (!yaExiste) {
         favoritos.add(producto);

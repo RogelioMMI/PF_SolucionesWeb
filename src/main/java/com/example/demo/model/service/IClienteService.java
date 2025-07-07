@@ -9,4 +9,7 @@ public interface IClienteService {
     public List<Cliente> cargarClientes();
     public Cliente buscarCliente(Long id);
     public String eliminarCliente(Long id);
+    public void registrarCliente (Cliente cliente);
+    public boolean existePorEmail(String email);
+    public Cliente buscarPorEmail(String email);
 }

@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.model.entity.Cliente;
+import com.example.demo.model.service.IClienteService;
+
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -78,4 +81,50 @@ public class LoginController {
         session.invalidate();
         return "redirect:/";
     }
+
+    @GetMapping("/registro")
+    public String mostrarFormularioRegistro(Map<String, Object> model) {
+        model.put("cliente", new com.example.demo.model.entity.Cliente());
+        return "registro";
+    }
+
+    @Autowired
+    private IClienteService clienteService;
+
+    @PostMapping("/registro")
+    public String registrarCliente(
+        @RequestParam String nombre,
+        @RequestParam String email,
+        @RequestParam String clave,
+        @RequestParam String confirmar,
+        RedirectAttributes flash,
+        HttpSession session) {
+
+    if (!clave.equals(confirmar)) {
+        flash.addFlashAttribute("errorRegistro", "Las contraseñas no coinciden.");
+        return "redirect:/registro";
+    }
+
+    if (clienteService.existePorEmail(email)) {
+        flash.addFlashAttribute("errorRegistro", "El correo ya está registrado.");
+        return "redirect:/registro";
+    }
+
+    Cliente nuevo = new Cliente();
+    nuevo.setNombre(nombre);
+    nuevo.setEmail(email);
+    nuevo.setClave(clave);
+
+    clienteService.registrarCliente(nuevo);
+
+    Cliente clienteGuardado = clienteService.buscarPorEmail(email);
+    session.setAttribute("usuario", clienteGuardado.getNombre());
+    session.setAttribute("rol", "cliente");
+    session.setAttribute("clienteId", clienteGuardado.getId());
+    
+
+    flash.addFlashAttribute("mensajeRegistro", "¡Registro exitoso!");
+    return "redirect:/";
+}
+
 }

@@ -12,14 +12,14 @@
     <div class="container px-4 px-lg-5">
         <a class="navbar-brand" href="/">Volver al Inicio</a>
         <div class="d-flex ms-auto">
-            <a class="btn btn-outline-primary d-flex align-items-center" href="/carrito">
+            <a class="btn btn-outline-dark d-flex align-items-center" href="/carrito">
                 <i class="bi-cart-fill me-1"></i>
                     Ver Carrito
-                <span class="badge rounded-pill text-bg-primary ms-1" th:text="${cantidadCarrito}">0</span>
+                <span class="badge bg-dark text-white ms-1 rounded-pill" th:text="${cantidadCarrito}">0</span>
             </a>
-            <a class="btn btn-outline-danger d-flex align-items-center ms-3" href="/favoritos">
+            <a class="btn btn-outline-dark d-flex align-items-center ms-3" href="/favoritos">
                 <i class="bi bi-heart-fill me-2"></i> Favoritos
-                <span class="badge rounded-pill text-bg-danger ms-1" th:text="${cantidadFavoritos}">0</span>
+                <span class="badge bg-dark text-white ms-1 rounded-pill" th:text="${cantidadFavoritos}">0</span>
             </a>
         </div>
     </div>
@@ -42,7 +42,7 @@
     <div class="row row-cols-1 row-cols-md-3 g-4" th:if="${not #lists.isEmpty(favoritos)}">
         <div class="col" th:each="producto, iter : ${favoritos}">
             <div class="card h-100 shadow">
-                <img th:src="@{/imagen/{id}(id=${producto.id})}" class="card-img-top" alt="Imagen">
+                <img class="card-img-top" th:src="@{/admin/productos/imagen/{id}(id=${producto.id})}" alt="Imagen producto" />
                 <div class="card-body text-center">
                     <h5 class="card-title" th:text="${producto.nombre}"></h5>
                     <p class="card-text">S/. <span th:text="${producto.precio}"></span></p>

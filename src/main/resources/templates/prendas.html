@@ -455,9 +455,9 @@
               <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
                 data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="/prendas">Prendas</a></li>
-                <li><a class="dropdown-item" href="/juegos">Juegos</a></li>
-                <li><a class="dropdown-item" href="/joyeria">Joyería</a></li>
+                <li><a class="dropdown-item" href="/admin/productos/juegos">Juegos</a></li>
+                <li><a class="dropdown-item" href="/admin/productos/prendas">Prendas</a></li>
+                <li><a class="dropdown-item" href="/admin/productos/joyeria">Joyeria</a></li>
               </ul>
             </li>
           </ul>
@@ -525,39 +525,37 @@
     </header>
 
         <section class="py-5">
-          <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-              <!-- Cargar productos desde la tabla-->
-              <!-- Debe ir solamente th:each="producto : ${productos}"-->
-              <!-- Pero como estamos probando, utilizamos un if-->
-              <div class="col mb-5" th:each="producto : ${productos}" th:if="${producto.id >= 1 and producto.id <= 8}">
-                <div class="card h-100">
-                  <img class="card-img-top" th:src="@{/imagen/{id}(id=${producto.id})}" alt="Imagen producto" />
-                  <div class="card-body p-4 text-center">
-                    <h5 class="fw-bolder" th:text="${producto.nombre}"></h5>
-                    <span th:text="'S/. ' + ${producto.precio}"></span>
-                  </div>
-                  <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div class="text-center">
-                      <form method="post" action="/agregar-al-carrito">
-                        <input type="hidden" name="id" th:value="${producto.id}" />
-                        <input type="hidden" name="redirect" value="prendas" />
-                        <button type="submit" class="btn btn-outline-dark mt-auto">Añadir al carrito</button>
-                      </form>
-                      <form method="post" action="/favoritos/agregar">
-                      <input type="hidden" name="id" th:value="${producto.id}">
-                      <input type="hidden" name="redirect" value="prendas">
-                      <button type="submit" class="btn btn-light position-absolute" style="top: 0.5rem; left: 0.5rem; z-index: 10; border: none;">
-                      <i class="bi bi-heart-fill text-danger"></i>
-                      </button>
-                      </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+  <div class="container px-4 px-lg-5 mt-5">
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+      <div class="col mb-5" th:each="producto : ${productos}">
+        <div class="card h-100">
+          <img class="card-img-top" th:src="@{'/assets/' + ${producto.imagenNombre}}" alt="Imagen producto" />
+          <div class="card-body p-4 text-center">
+            <h5 class="fw-bolder" th:text="${producto.nombre}"></h5>
+            <span th:text="'S/. ' + ${producto.precio}"></span>
+          </div>
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+              <form method="post" action="/agregar-al-carrito">
+                <input type="hidden" name="id" th:value="${producto.id}" />
+                <input type="hidden" name="redirect" value="prendas" />
+                <button type="submit" class="btn btn-outline-dark mt-auto">Añadir al carrito</button>
+              </form>
+              <form method="post" action="/favoritos/agregar">
+                <input type="hidden" name="id" th:value="${producto.id}">
+                <input type="hidden" name="redirect" value="prendas">
+                <button type="submit" class="btn btn-light position-absolute" style="top: 0.5rem; left: 0.5rem; z-index: 10; border: none;">
+                  <i class="bi bi-heart-fill text-danger"></i>
+                </button>
+              </form>
             </div>
-        </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
     <footer class="py-5 bg-dark">
         <div class="container"><p class="m-0 text-center text-white">© 2025 Signus - Todos los derechos reservados</p></div>
@@ -566,3 +564,4 @@
     <script src="/js/scripts.js"></script>
   </body>
 </html>
+

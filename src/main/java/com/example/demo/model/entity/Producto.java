@@ -7,13 +7,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "productos")
-public class Producto implements Serializable{
+public class Producto implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_Producto")
@@ -28,9 +28,11 @@ public class Producto implements Serializable{
     @Column(name = "precio")
     private Double precio;
 
-    @Lob
-    @Column(name = "imagen", columnDefinition = "MEDIUMLOB")
-    private byte[] imagen;
+    @Column(name = "imagen_nombre")
+    private String imagenNombre; 
+
+    @Column(name = "categoria")
+    private String categoria; // <<<< CAMPO PARA CATEGORÍA
 
     @Transient
     private int cantidad = 1;
@@ -38,10 +40,10 @@ public class Producto implements Serializable{
     public Producto() {
     }
 
-    public Producto(String nombre, Double precio, byte[] imagen) {
+    public Producto(String nombre, Double precio, String imagenNombre) {
         this.nombre = nombre;
         this.precio = precio;
-        this.imagen = imagen;
+        this.imagenNombre = imagenNombre;
         this.cantidad = 1;
     }
 
@@ -77,12 +79,12 @@ public class Producto implements Serializable{
         this.precio = precio;
     }
 
-    public byte[] getImagen() {
-        return imagen;
+    public String getImagenNombre() {
+        return imagenNombre;
     }
 
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
+    public void setImagenNombre(String imagenNombre) {
+        this.imagenNombre = imagenNombre;
     }
 
     public int getCantidad() {
@@ -91,5 +93,14 @@ public class Producto implements Serializable{
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    // <<< FALTABA ESTO >>>
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }

@@ -44,4 +44,19 @@ public class ClienteService implements IClienteService{
         return "Se elimino el cliente";
     }
 
+    @Override
+    public void registrarCliente(Cliente cliente) {
+        clienteRepository.save(cliente);
+    }
+
+    @Override
+    public boolean existePorEmail(String email) {
+        return clienteRepository.existsByEmail(email);
+    }
+
+    @Override
+    public Cliente buscarPorEmail(String email) {
+        return clienteRepository.findByEmail(email);
+    }
+
 }

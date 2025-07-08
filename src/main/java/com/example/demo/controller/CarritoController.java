@@ -203,6 +203,9 @@ public class CarritoController {
 
     @GetMapping("/")
     public String index(HttpSession session, Model model) {
+        List<Producto> productos = productoService.cargarProductos();
+        model.addAttribute("productos", productos);
+
         @SuppressWarnings("unchecked")
         List<Producto> carrito = (List<Producto>) session.getAttribute("carrito");
         int cantidad = (carrito != null) ? carrito.size() : 0;

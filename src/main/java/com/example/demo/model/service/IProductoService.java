@@ -9,4 +9,5 @@ public interface IProductoService {
     public List<Producto> cargarProductos();
     public Producto buscarProducto(Long id);
     public String eliminarProducto(Long id);
+    public List<Producto> findByCategoriaIgnoreCase(String categoria);
 }

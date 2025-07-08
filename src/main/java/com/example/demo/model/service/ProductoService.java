@@ -61,6 +61,11 @@ public class ProductoService implements IProductoService{
         return "Producto no encontrado";
     }
 
+    @Override
+    public List<Producto> findByCategoriaIgnoreCase(String categoria) {
+        return productoRepository.findByCategoriaIgnoreCase(categoria);
+    }
+
     
     
 

@@ -120,10 +120,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Carrito - SIGNUS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Carrito – SIGNUS</title>
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
@@ -181,37 +179,31 @@
         <tbody>
           <tr th:each="item, stat : ${carrito}" class="text-center align-middle">
             <td>
-              <img th:src="@{/imagen/{id}(id=${item.id})}" alt="Imagen" width="80" />
+              <img
+                th:src="@{/admin/productos/imagen/{id}(id=${item.id})}"
+                alt="Imagen producto"
+                width="80"/>
             </td>
             <td th:text="${item.nombre}">Nombre producto</td>
             <td class="text-center">
               <form th:action="@{/carrito/restar}" method="post" style="display:inline;">
                 <input type="hidden" name="index" th:value="${stat.index}" />
-                <button type="submit" class="btn btn-outline-secondary btn-sm">
-                  <i class="bi bi-dash"></i>
-                </button>
+                <button type="submit" class="btn btn-outline-secondary btn-sm"><i class="bi bi-dash"></i></button>
               </form>
               <span class="mx-2" th:text="${item.cantidad}">1</span>
               <form th:action="@{/carrito/sumar}" method="post" style="display:inline;">
                 <input type="hidden" name="index" th:value="${stat.index}" />
-                <button type="submit" class="btn btn-outline-secondary btn-sm">
-                  <i class="bi bi-plus"></i>
-                </button>
+                <button type="submit" class="btn btn-outline-secondary btn-sm"><i class="bi bi-plus"></i></button>
               </form>
             </td>
             <td>S/. <span th:text="${item.precio}">0.00</span></td>
             <td>
-              S/. 
-              <span th:text="${#numbers.formatDecimal(item.precio * item.cantidad, 1, 'POINT', 2, 'POINT')}">
-                0.00
-              </span>
+              S/. <span th:text="${#numbers.formatDecimal(item.precio * item.cantidad,1,'POINT',2,'POINT')}">0.00</span>
             </td>
             <td>
               <form th:action="@{/carrito/eliminar}" method="post" style="display:inline;">
                 <input type="hidden" name="index" th:value="${stat.index}" />
-                <button type="submit" class="btn btn-danger btn-sm">
-                  <i class="bi bi-trash"></i> Eliminar
-                </button>
+                <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Eliminar</button>
               </form>
               <form th:action="@{/favoritos/agregar}" method="post" style="display:inline;" class="ms-2">
                 <input type="hidden" name="id" th:value="${item.id}" />
@@ -227,7 +219,7 @@
           <tr class="table-secondary">
             <td colspan="4" class="text-end fw-bold">Total:</td>
             <td colspan="2" class="fw-bold">
-              S/. <span th:text="${#numbers.formatDecimal(totalCarrito, 1, 'POINT', 2, 'POINT')}">0.00</span>
+              S/. <span th:text="${#numbers.formatDecimal(totalCarrito,1,'POINT',2,'POINT')}">0.00</span>
             </td>
           </tr>
         </tfoot>
@@ -246,12 +238,12 @@
 
   <!-- FOOTER -->
   <footer class="py-5 bg-dark mt-5">
-    <div class="container text-center text-white">
-      © 2025 Signus – Todos los derechos reservados
-    </div>
+    <div class="container text-center text-white">© 2025 Signus – Todos los derechos reservados</div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/js/scripts.js"></script>
 </body>
 </html>
+
+

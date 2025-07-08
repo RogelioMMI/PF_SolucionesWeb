@@ -48,20 +48,20 @@ public class PaginaController {
     }
     @GetMapping("/joyeria")
     public String mostrarJoyerias(Model model){
-        model.addAttribute("productos", productoService.cargarProductos());
+        model.addAttribute("productos", productoService.findByCategoriaIgnoreCase("joyeria"));
         return "joyeria";
     }
 
     @GetMapping("/juegos")
     public String mostrarJuegos(Model model){
-        model.addAttribute("productos", productoService.cargarProductos());
-        return "juegos";
+    model.addAttribute("productos", productoService.findByCategoriaIgnoreCase("juegos"));        
+    return "juegos";
     }
 
     @GetMapping("/prendas")
     public String mostrarPrendas(Model model){
-        model.addAttribute("productos", productoService.cargarProductos());
-        return "prendas";
+    model.addAttribute("productos", productoService.findByCategoriaIgnoreCase("prendas"));        
+    return "prendas";
     }
 
 

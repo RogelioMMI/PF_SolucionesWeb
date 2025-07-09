@@ -1,55 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8" />
-  <title>Mi Perfil</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body>
-  <div class="container mt-5">
-    <h2 class="mb-4 text-center">Perfil de Cliente</h2>
-
-    <div class="card mb-4">
-      <div class="card-body">
-        <h5 class="card-title">Información Personal</h5>
-        <p><strong>Nombre:</strong> <span th:text="${cliente.nombre}"></span></p>
-        <p><strong>Correo electrónico:</strong> <span th:text="${cliente.email}"></span></p>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Pedidos Realizados</h5>
-        <div th:if="${#lists.isEmpty(pedidos)}">
-          <p>Aún no has realizado ningún pedido.</p>
-        </div>
-        <table class="table" th:if="${!#lists.isEmpty(pedidos)}">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Estado</th>
-              <th>Total (S/.)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="p : ${pedidos}">
-              <td th:text="${p.id}"></td>
-              <td th:text="${p.estado}"></td>
-              <td th:text="${p.total_pedido}"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="text-center mt-4">
-      <a href="/" class="btn btn-secondary">Volver al Inicio</a>
-    </div>
-  </div>
-</body>
-</html> -->
-
-
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -69,7 +17,6 @@
       </div>
     </div>
 
-    <!-- Agrega esto después de la card de información personal y antes de la sección de pedidos -->
     <div class="card mb-4">
     <div class="card-body">
         <h5 class="card-title">Cambiar Contraseña</h5>

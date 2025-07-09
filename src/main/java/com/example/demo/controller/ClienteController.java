@@ -1,8 +1,14 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.entity.Cliente;
+import com.example.demo.model.entity.Pedido;
 import com.example.demo.model.service.IClienteService;
+import com.example.demo.model.service.IPedidoService;
+
 import jakarta.servlet.http.HttpSession;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,4 +54,8 @@ public class ClienteController {
         flash.addFlashAttribute("respuestaCliente", respuesta);
         return "redirect:/admin/clientes/panel";
     }
+
+    @Autowired
+    private IPedidoService pedidoService;
+
 }

@@ -16,7 +16,7 @@
     <link href="/css/styles.css" rel="stylesheet" />
   </head>
   <body>
-    <!-- NAVBAR -->
+
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm border-bottom">
       <div class="container px-4 px-lg-5">
         <a class="navbar-brand fw-bold text-primary" th:href="@{/}">
@@ -47,7 +47,6 @@
             </li>
           </ul>
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-            <!-- Si NO hay usuario -->
             <li class="nav-item" th:if="${usuarioLogueado == null}">
               <a
                 class="nav-link d-flex align-items-center gap-2"
@@ -58,7 +57,6 @@
                 <i class="bi bi-person-circle fs-5"></i> Iniciar Sesión
               </a>
             </li>
-            <!-- Cliente -->
             <li
               class="nav-item dropdown"
               th:if="${usuarioLogueado != null and session.rol == 'cliente'}"
@@ -75,7 +73,7 @@
                 <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
               </ul>
             </li>
-            <!-- Admin -->
+
             <li
               class="nav-item dropdown"
               th:if="${usuarioLogueado != null and session.rol == 'admin'}"
@@ -95,7 +93,7 @@
                 <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
               </ul>
             </li>
-            <!-- Carrito y Favoritos -->
+
             <li class="nav-item ms-3">
               <a class="btn btn-outline-primary" th:href="@{/carrito}">
                 <i class="bi bi-cart-fill me-1"></i> Carrito
@@ -121,7 +119,6 @@
       </div>
     </nav>
 
-    <!-- HEADER -->
     <header class="bg-dark py-5">
       <div class="container text-center text-white">
         <h1 class="display-4 fw-bolder">
@@ -133,7 +130,6 @@
       </div>
     </header>
 
-    <!-- LISTADO JOYERÍA -->
     <section class="py-5">
       <div class="container px-4 px-lg-5 mt-5">
         <div
@@ -193,7 +189,6 @@
       </div>
     </section>
 
-    <!-- MODAL LOGIN (idéntico al resto) -->
     <div
       class="modal fade"
       id="loginModal"
@@ -260,7 +255,6 @@
       </div>
     </div>
 
-    <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/scripts.js"></script>
   </body>

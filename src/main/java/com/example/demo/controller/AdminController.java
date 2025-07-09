@@ -22,8 +22,7 @@ public class AdminController {
         @RequestParam String usuario,
         @RequestParam String contrasena,
         HttpSession session,
-        Model model
-    ) {
+        Model model) {
         if ("admin".equals(usuario) && "admin123".equals(contrasena)) {
             session.setAttribute("rol", "admin");
             return "redirect:/admin/inicio";

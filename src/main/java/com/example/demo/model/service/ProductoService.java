@@ -47,7 +47,6 @@ public class ProductoService implements IProductoService{
         if (producto != null) {
             String nombreImagen = producto.getImagenNombre();
             if (nombreImagen != null && !nombreImagen.isEmpty()) {
-                // Ajuste de ruta para tu proyecto
                 Path ruta = Paths.get("src/main/resources/static/assets").resolve(nombreImagen);
                 try {
                     Files.deleteIfExists(ruta);
@@ -65,9 +64,4 @@ public class ProductoService implements IProductoService{
     public List<Producto> findByCategoriaIgnoreCase(String categoria) {
         return productoRepository.findByCategoriaIgnoreCase(categoria);
     }
-
-    
-    
-
-
 }

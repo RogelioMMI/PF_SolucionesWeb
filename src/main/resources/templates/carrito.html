@@ -148,7 +148,7 @@
             <td>
               <form th:action="@{/carrito/eliminar}" method="post" style="display:inline;">
                 <input type="hidden" name="index" th:value="${stat.index}" />
-                <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Eliminar</button>
+                <button type="submit" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i> Eliminar</button>
               </form>
               <form th:action="@{/favoritos/agregar}" method="post" style="display:inline;" class="ms-2">
                 <input type="hidden" name="id" th:value="${item.id}" />

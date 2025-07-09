@@ -13,85 +13,81 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm border-bottom">
-          <div class="container px-4 px-lg-5">
-            <a class="navbar-brand fw-bold text-primary" href="/">
-              <i class="bi bi-shop-window me-2"></i>Signus
-            </a>
+      <div class="container px-4 px-lg-5">
+        <a class="navbar-brand fw-bold text-primary" href="/">
+          <i class="bi bi-shop-window me-2"></i>Signus
+        </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item">
-                  <a class="nav-link active" href="/">Inicio</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/acerca">Acerca de</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">Categorías</a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="/admin/productos/juegos">Juegos</a></li>
-                    <li><a class="dropdown-item" href="/admin/productos/prendas">Prendas</a></li>
-                    <li><a class="dropdown-item" href="/admin/productos/joyeria">Joyeria</a></li>
-
-                  </ul>
-                </li>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+            <li class="nav-item">
+              <a class="nav-link active" href="/">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/acerca">Acerca de</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">Categorías</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/admin/productos/juegos">Juegos</a></li>
+                <li><a class="dropdown-item" href="/admin/productos/prendas">Prendas</a></li>
+                <li><a class="dropdown-item" href="/admin/productos/joyeria">Joyeria</a></li>
               </ul>
+            </li>
+          </ul>
 
-              <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+            <li class="nav-item" th:if="${usuarioLogueado == null}">
+              <a class="nav-link d-flex align-items-center gap-2" href="#" data-bs-toggle="modal" data-bs-target="#loginModal" >
+                <i class="bi bi-person-circle fs-5"></i> Iniciar Sesión
+              </a>
+            </li>
 
-                <li class="nav-item" th:if="${usuarioLogueado == null}">
-                  <a class="nav-link d-flex align-items-center gap-2" href="#" data-bs-toggle="modal" data-bs-target="#loginModal" >
-                    <i class="bi bi-person-circle fs-5"></i> Iniciar Sesión
-                  </a>
-                </li>
-
-                <li class="nav-item dropdown" th:if="${usuarioLogueado != null and session.rol == 'cliente'}">
-                  <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" id="clienteMenu" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-person-fill"></i>
-                    <span th:text="${usuarioLogueado}">Cliente</span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="clienteMenu">
-                    <li><a class="dropdown-item" href="/perfil">Perfil</a></li>
-                    <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
-                  </ul>
-                </li>
-
-                <li class="nav-item dropdown" th:if="${usuarioLogueado != null and session.rol == 'admin'}">
-                  <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" id="adminMenu" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-shield-lock-fill"></i> Admin
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminMenu">
-                    <li><a class="dropdown-item" th:href="@{/admin/inicio}">Panel Admin</a></li>
-                    <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
-                  </ul>
-                </li>
-
-                <li class="nav-item ms-3">
-                  <a class="btn btn-outline-primary d-flex align-items-center" href="/carrito">
-                    <i class="bi bi-cart-fill me-2"></i> Carrito
-                    <span class="badge bg-primary text-white ms-2 rounded-pill" th:text="${cantidadCarrito}">0</span>
-                  </a>
-                </li>
-
-                <li class="nav-item ms-2">
-                  <a class="btn btn-outline-danger d-flex align-items-center" href="/favoritos">
-                    <i class="bi bi-heart-fill me-2"></i> Favoritos
-                    <span class="badge bg-danger text-white ms-2 rounded-pill" th:text="${cantidadFavoritos}">0</span>
-                  </a>
-                </li>
-
+            <li class="nav-item dropdown" th:if="${usuarioLogueado != null and session.rol == 'cliente'}">
+              <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" id="clienteMenu" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-fill"></i>
+                <span th:text="${usuarioLogueado}">Cliente</span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="clienteMenu">
+                <li><a class="dropdown-item" href="/perfil">Perfil</a></li>
+                <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
               </ul>
-            </div>
-          </div>
+            </li>
+
+            <li class="nav-item dropdown" th:if="${usuarioLogueado != null and session.rol == 'admin'}">
+              <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" id="adminMenu" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-shield-lock-fill"></i> Admin
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminMenu">
+                <li><a class="dropdown-item" th:href="@{/admin/inicio}">Panel Admin</a></li>
+                <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item ms-3">
+              <a class="btn btn-outline-primary d-flex align-items-center" href="/carrito">
+                <i class="bi bi-cart-fill me-2"></i> Carrito
+                <span class="badge bg-primary text-white ms-2 rounded-pill" th:text="${cantidadCarrito}">0</span>
+              </a>
+            </li>
+
+            <li class="nav-item ms-2">
+              <a class="btn btn-outline-danger d-flex align-items-center" href="/favoritos">
+                <i class="bi bi-heart-fill me-2"></i> Favoritos
+                <span class="badge bg-danger text-white ms-2 rounded-pill" th:text="${cantidadFavoritos}">0</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
 
     <header class="bg-dark py-5">
@@ -128,6 +124,7 @@
                   alt="Imagen producto"
                   width="80"/>
               </td>
+              
               <td th:text="${item.nombre}">Nombre producto</td>
               <td class="text-center">
                 <form th:action="@{/carrito/restar}" method="post" style="display:inline;">
@@ -186,83 +183,86 @@
         </div>
       </div>
     </div>
-          <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="card shadow border-0 mb-0">
-                <div class="card-header bg-dark text-white text-center">
-                  <h3 class="mb-0"><i class="bi bi-person-lock"></i> Iniciar Sesión</h3>
-                </div>
-                <div class="card-body">
-                  
-                  <div th:if="${errorLogin}" class="alert alert-danger text-center mb-3" th:text="${errorLogin}"></div>
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="card shadow border-0 mb-0">
+            <div class="card-header bg-dark text-white text-center">
+              <h3 class="mb-0"><i class="bi bi-person-lock"></i> Iniciar Sesión</h3>
+            </div>
 
-                  <form method="post" action="/login">
-                    <div class="mb-3">
-                      <label for="usuario" class="form-label">Usuario</label>
-                      <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-person"></i></span>
-                        <input type="text" class="form-control" id="usuario" name="usuario" required autofocus>
-                      </div>
-                    </div>
-                    <div class="mb-3">
-                      <label for="contrasena" class="form-label">Contraseña</label>
-                      <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                        <input type="password" class="form-control" id="contrasena" name="contrasena" required>
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-dark w-100">Ingresar</button>
-                    <button type="button" class="btn btn-secondary w-100 mt-2" data-bs-dismiss="modal">Cancelar</button>
-                    <div class="text-center mt-2">
-                      <a href="/registro" class="btn btn-secondary w-100">
-                        <i class="bi bi-person-plus"></i> Regístrate
-                      </a>
-                    </div>
-                  </form>
+            <div class="card-body">             
+              <div th:if="${errorLogin}" class="alert alert-danger text-center mb-3" th:text="${errorLogin}"></div>
+
+              <form method="post" action="/login">
+                <div class="mb-3">
+                  <label for="usuario" class="form-label">Usuario</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                    <input type="text" class="form-control" id="usuario" name="usuario" required autofocus>
+                  </div>
                 </div>
-              </div>
+
+                <div class="mb-3">
+                  <label for="contrasena" class="form-label">Contraseña</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                    <input type="password" class="form-control" id="contrasena" name="contrasena" required>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-dark w-100">Ingresar</button>
+                <button type="button" class="btn btn-secondary w-100 mt-2" data-bs-dismiss="modal">Cancelar</button>
+                
+                <div class="text-center mt-2">
+                  <a href="/registro" class="btn btn-secondary w-100">
+                    <i class="bi bi-person-plus"></i> Regístrate
+                  </a>
+                </div>
+              </form>
             </div>
           </div>
         </div>
+      </div>
+    </div>
 
-  <div class="modal fade" id="loginRequiredModal" tabindex="-1" aria-labelledby="loginRequiredModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header bg-warning">
-          <h5 class="modal-title" id="loginRequiredModalLabel"><i class="bi bi-exclamation-triangle"></i> Atención</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
-        <div class="modal-body text-center">
-          Debes <a href="#" id="abrirLoginDesdeAdvertencia">iniciar sesión</a> o
-          <a href="/registro">registrarte</a> para realizar esta acción.
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+    <div class="modal fade" id="loginRequiredModal" tabindex="-1" aria-labelledby="loginRequiredModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-warning">
+            <h5 class="modal-title" id="loginRequiredModalLabel"><i class="bi bi-exclamation-triangle"></i> Atención</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body text-center">
+            Debes <a href="#" id="abrirLoginDesdeAdvertencia">iniciar sesión</a> o
+            <a href="/registro">registrarte</a> para realizar esta acción.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var btn = document.getElementById('abrirLoginDesdeAdvertencia');
-    var modalAdvertenciaEl = document.getElementById('loginRequiredModal');
-    var modalLoginEl = document.getElementById('loginModal');
-    if (btn && modalAdvertenciaEl && modalLoginEl) {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        var modalAdvertencia = bootstrap.Modal.getOrCreateInstance(modalAdvertenciaEl);
-        modalAdvertencia.hide();
-        modalAdvertenciaEl.addEventListener('hidden.bs.modal', function handler() {
-          var modalLogin = bootstrap.Modal.getOrCreateInstance(modalLoginEl);
-          modalLogin.show();
-          modalAdvertenciaEl.removeEventListener('hidden.bs.modal', handler);
-        }, { once: true });
-      });
-    }
-  });
-  </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var btn = document.getElementById('abrirLoginDesdeAdvertencia');
+      var modalAdvertenciaEl = document.getElementById('loginRequiredModal');
+      var modalLoginEl = document.getElementById('loginModal');
+      if (btn && modalAdvertenciaEl && modalLoginEl) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          var modalAdvertencia = bootstrap.Modal.getOrCreateInstance(modalAdvertenciaEl);
+          modalAdvertencia.hide();
+          modalAdvertenciaEl.addEventListener('hidden.bs.modal', function handler() {
+            var modalLogin = bootstrap.Modal.getOrCreateInstance(modalLoginEl);
+            modalLogin.show();
+            modalAdvertenciaEl.removeEventListener('hidden.bs.modal', handler);
+          }, { once: true });
+        });
+      }
+    });
+    </script>
 
     <footer class="py-5 bg-dark mt-5">
       <div class="container text-center text-white">© 2025 Signus – Todos los derechos reservados</div>

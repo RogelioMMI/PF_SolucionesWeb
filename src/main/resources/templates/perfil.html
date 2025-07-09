@@ -61,13 +61,31 @@
 <body>
 <div class="container mt-5">
     <h2 class="mb-4 text-center">Perfil de Cliente</h2>
-
     <div class="card mb-4">
       <div class="card-body">
         <h5 class="card-title">Información Personal</h5>
         <p><strong>Nombre:</strong> <span th:text="${cliente.nombre}"></span></p>
         <p><strong>Correo electrónico:</strong> <span th:text="${cliente.email}"></span></p>
       </div>
+    </div>
+
+    <!-- Agrega esto después de la card de información personal y antes de la sección de pedidos -->
+    <div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Cambiar Contraseña</h5>
+        <form th:action="@{/perfil/cambiar-contrasena}" method="post">
+        <div class="mb-3">
+            <label for="actual" class="form-label">Contraseña actual</label>
+            <input type="password" class="form-control" id="actual" name="actual" required>
+        </div>
+        <div class="mb-3">
+            <label for="nueva" class="form-label">Nueva contraseña</label>
+            <input type="password" class="form-control" id="nueva" name="nueva" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        </form>
+        <div th:if="${mensajeCambioContrasena}" class="alert alert-info mt-3" th:text="${mensajeCambioContrasena}"></div>
+    </div>
     </div>
 
   <h3>Mis pedidos</h3>
@@ -106,6 +124,15 @@
       </div>
     </div>
   </div>
+
+  <div class="text-center mt-4">
+  <a href="/" class="btn btn-secondary">
+    <i class="bi bi-arrow-left-circle"></i> Volver al Inicio
+  </a>
+</div>
+
+
+  
 </div>
 </body>
 </html>

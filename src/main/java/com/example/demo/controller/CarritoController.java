@@ -137,21 +137,13 @@ public class CarritoController {
 
     @GetMapping("/carrito/finalizar-compra")
     public String finalizarCompra(HttpSession session){
-        // Obtener cliente
-        //Integer clienteIdInt = (Integer) session.getAttribute("clienteId");
-        //if (clienteIdInt == null) {
-        //    return "redirect:/login?error=no-cliente";
-        //}
-        //Long clienteId = clienteIdInt.longValue();
-        //Cliente cliente = clienteService.buscarCliente(clienteId);
         Object idObj = session.getAttribute("clienteId");
         if (idObj == null) {
             return "redirect:/login?error=no-cliente";
         }
         Long clienteId = ((Number) idObj).longValue();
         Cliente cliente = clienteService.buscarCliente(clienteId);
-    
-        // Crear nuevo pedido
+
         Pedido pedido = new Pedido();
         pedido.setCliente(cliente);
         pedido.setEstado("Pendiente");
@@ -163,20 +155,19 @@ public class CarritoController {
 
         for (Producto p : carrito) {
             if (p.getId() == null) {
-            continue; // o redirige con mensaje de error
+            continue;
             }
 
-        // Cargar producto desde BD (por si acaso)
-        Producto productoBD = productoService.buscarProducto(p.getId());
+            Producto productoBD = productoService.buscarProducto(p.getId());
 
-        DetallePedido detalle = new DetallePedido();
-        detalle.setProducto(productoBD); // asegúrate que está manejado por la base de datos
-        detalle.setCantidad(p.getCantidad());
-        detalle.setPrecioUnitario(p.getPrecio());
-        detalle.setPedido(pedido); // vínculo bidireccional
+            DetallePedido detalle = new DetallePedido();
+            detalle.setProducto(productoBD);
+            detalle.setCantidad(p.getCantidad());
+            detalle.setPrecioUnitario(p.getPrecio());
+            detalle.setPedido(pedido);
 
-        detalles.add(detalle);
-        total += p.getCantidad() * p.getPrecio();
+            detalles.add(detalle);
+            total += p.getCantidad() * p.getPrecio();
         }
 
         pedido.setTotal_pedido(total);

@@ -1,5 +1,6 @@
 package com.example.demo.model.service;
 
+import com.example.demo.model.entity.Cliente;
 import com.example.demo.model.entity.Pedido;
 import com.example.demo.model.repository.IPedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,10 @@ public class PedidoService implements IPedidoService {
     public String eliminarPedido(Long id) {
         pedidoRepository.deleteById(id);
         return "Se eliminó el pedido";
+    }
+
+    @Override
+    public List<Pedido> buscarPorCliente(Cliente cliente) {
+        return pedidoRepository.findByCliente(cliente);
     }
 }

@@ -160,6 +160,10 @@ public class CarritoController {
 
             Producto productoBD = productoService.buscarProducto(p.getId());
 
+            Long nuevoStock = productoBD.getStock() - p.getCantidad();
+            productoBD.setStock(nuevoStock);
+            productoService.guardarProducto(productoBD);
+
             DetallePedido detalle = new DetallePedido();
             detalle.setProducto(productoBD);
             detalle.setCantidad(p.getCantidad());

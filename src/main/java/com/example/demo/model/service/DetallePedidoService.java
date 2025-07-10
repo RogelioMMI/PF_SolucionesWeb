@@ -38,17 +38,6 @@ public class DetallePedidoService implements IDetallePedidoService {
         return detallePedidoRepository.findById(id).orElse(null);
     }
 
-    // @Override
-    // public String eliminarDetallePedido(Long id) {
-    //     DetallePedido detalle = detallePedidoRepository.findById(id).orElse(null);
-    //     if (detalle == null) return "Detalle no encontrado";
-
-    //     Pedido pedido = detalle.getPedido();
-    //     detallePedidoRepository.deleteById(id);
-
-    //     actualizarTotalPedido(detalle);
-    //     return "Se eliminó el detalle de pedido";
-    // }
     @Override
     public String eliminarDetallePedido(Long id) {
         DetallePedido detalle = detallePedidoRepository.findById(id).orElse(null);

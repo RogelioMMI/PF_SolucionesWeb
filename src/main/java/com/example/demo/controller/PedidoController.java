@@ -58,20 +58,12 @@ public class PedidoController {
         flash.addFlashAttribute("respuestaPedido", respuesta);
         return "redirect:/admin/pedidos/panel";
     }
-    // @GetMapping("/detalle/{id}")
-    // public String verDetallePedido(@PathVariable("id") Long id, Model model) {
-    //     Pedido pedido = pedidoService.buscarPedido(id);
-    //     if (pedido == null) {
-    //         return "redirect:/admin/pedidos/panel";
-    //     }
-    //     model.addAttribute("pedido", pedido);
-    //     return "admin/pedidos/detalle";
-    // }
+
     @GetMapping("/detalle/{id}")
     public String verDetalle(@PathVariable Long id, Model model) {
         Pedido pedido = pedidoService.buscarPedido(id);
         model.addAttribute("pedido", pedido);
-        model.addAttribute("productos", productoService.cargarProductos()); // Para el modal
+        model.addAttribute("productos", productoService.cargarProductos());
         return "admin/pedidos/detalle";
     }
 }

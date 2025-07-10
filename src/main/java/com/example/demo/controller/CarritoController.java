@@ -69,18 +69,6 @@ public class CarritoController {
     };
     }
 
-    // @GetMapping("/")
-    // public String index(HttpSession session, Model model) {
-    //     List<Producto> productos = productoService.cargarProductos();
-    //     model.addAttribute("productos", productos);
-
-    //     @SuppressWarnings("unchecked")
-    //     List<Producto> carrito = (List<Producto>) session.getAttribute("carrito");
-    //     int cantidad = (carrito != null) ? carrito.size() : 0;
-    //     model.addAttribute("cantidadCarrito", cantidad);
-    //     return "index";
-    // }
-
     @GetMapping("/carrito")
     public String verCarrito(@RequestParam(required = false, defaultValue = "") String from, HttpSession session, Model model){
         @SuppressWarnings("unchecked")

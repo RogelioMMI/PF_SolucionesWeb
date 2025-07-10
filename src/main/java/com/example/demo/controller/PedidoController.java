@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import com.example.demo.model.entity.Pedido;
 import com.example.demo.model.service.IClienteService;
 import com.example.demo.model.service.IPedidoService;
+import com.example.demo.model.service.IProductoService;
+
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,9 @@ public class PedidoController {
 
     @Autowired
     private IClienteService clienteService;
+
+    @Autowired
+    private IProductoService productoService;
 
     @GetMapping("/panel")
     public String panelPedidos(HttpSession session, Model model) {
@@ -53,13 +58,20 @@ public class PedidoController {
         flash.addFlashAttribute("respuestaPedido", respuesta);
         return "redirect:/admin/pedidos/panel";
     }
+    // @GetMapping("/detalle/{id}")
+    // public String verDetallePedido(@PathVariable("id") Long id, Model model) {
+    //     Pedido pedido = pedidoService.buscarPedido(id);
+    //     if (pedido == null) {
+    //         return "redirect:/admin/pedidos/panel";
+    //     }
+    //     model.addAttribute("pedido", pedido);
+    //     return "admin/pedidos/detalle";
+    // }
     @GetMapping("/detalle/{id}")
-    public String verDetallePedido(@PathVariable("id") Long id, Model model) {
+    public String verDetalle(@PathVariable Long id, Model model) {
         Pedido pedido = pedidoService.buscarPedido(id);
-        if (pedido == null) {
-            return "redirect:/admin/pedidos/panel";
-        }
         model.addAttribute("pedido", pedido);
+        model.addAttribute("productos", productoService.cargarProductos()); // Para el modal
         return "admin/pedidos/detalle";
     }
 }

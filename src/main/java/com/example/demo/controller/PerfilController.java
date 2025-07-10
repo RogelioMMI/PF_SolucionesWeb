@@ -23,59 +23,6 @@ public class PerfilController {
     @Autowired
     private IPedidoService pedidoService;
 
-    // @GetMapping("/perfil")
-    // public String verPerfil(HttpSession session, Model model) {
-    //     Object idObj = session.getAttribute("clienteId");
-    //     if (idObj == null) {
-    //         return "redirect:/?error=login-requerido";
-    //     }
-    //     Long clienteId = ((Integer) idObj).longValue();
-    //     Cliente cliente = clienteService.buscarCliente(clienteId);
-    //     List<Pedido> pedidos = pedidoService.buscarPorCliente(cliente);
-
-    //     model.addAttribute("cliente", cliente);
-    //     model.addAttribute("pedidos", pedidos);
-
-    //     return "perfil";
-    // }
-    // @PostMapping("/perfil/cambiar-contrasena")
-    // public String cambiarContrasena(
-    //         @RequestParam("actual") String actual,
-    //         @RequestParam("nueva") String nueva,
-    //         HttpSession session,
-    //         Model model) {
-
-    //     Object idObj = session.getAttribute("clienteId");
-    //     if (idObj == null) {
-    //         model.addAttribute("mensajeCambioContrasena", "Debes iniciar sesión.");
-    //         return "perfil";
-    //     }
-    //     Long clienteId = ((Number) idObj).longValue();
-    //     Cliente cliente = clienteService.buscarCliente(clienteId);
-
-    //     if (!cliente.getClave().equals(actual)) {
-    //         model.addAttribute("mensajeCambioContrasena", "La contraseña actual es incorrecta.");
-    //         model.addAttribute("cliente", cliente);
-    //         model.addAttribute("pedidos", pedidoService.buscarPorCliente(cliente));
-    //         return "perfil";
-    //     }
-
-    //     if (actual.equals(nueva)) {
-    //         model.addAttribute("mensajeCambioContrasena", "La nueva contraseña debe ser diferente a la actual.");
-    //         model.addAttribute("cliente", cliente);
-    //         model.addAttribute("pedidos", pedidoService.buscarPorCliente(cliente));
-    //         return "perfil";
-    //     }
-
-    //     cliente.setClave(nueva);
-    //     clienteService.guardarCliente(cliente);
-
-    //     model.addAttribute("mensajeCambioContrasena", "¡Contraseña actualizada correctamente!");
-    //     model.addAttribute("cliente", cliente);
-    //     model.addAttribute("pedidos", pedidoService.buscarPorCliente(cliente));
-    //     return "perfil";
-    // }
-
     @GetMapping("/perfil")
     public String verPerfil(HttpSession session, Model model) {
         Object idObj = session.getAttribute("clienteId");

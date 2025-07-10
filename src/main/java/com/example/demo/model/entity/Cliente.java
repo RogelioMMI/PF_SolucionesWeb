@@ -51,7 +51,6 @@ public class Cliente implements Serializable {
         this.email = email;
     }
 
-    // Nuevo getter y setter para 'clave'
     public String getClave() {
         return clave;
     }

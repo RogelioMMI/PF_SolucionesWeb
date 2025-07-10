@@ -1,50 +1,51 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8" />
-  <title>Editar Cliente</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body>
-  <div class="container mt-5" style="max-width: 500px;">
-    <h2 class="mb-4 text-center">Editar Cliente</h2>
-    <form th:action="@{/admin/clientes/formulario}" th:object="${cliente}" method="post" class="needs-validation" novalidate>
-      <input type="hidden" th:field="*{id}" />
-      <div class="mb-3">
-        <label class="form-label">Nombre</label>
-        <input th:field="*{nombre}" type="text" class="form-control" required />
-        <div class="invalid-feedback">Ingrese el nombre.</div>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input th:field="*{email}" type="email" class="form-control" required />
-        <div class="invalid-feedback">Ingrese un email válido.</div>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Contraseña</label>
-        <input th:field="*{clave}" type="password" class="form-control" required />
-        <div class="invalid-feedback">Ingrese la contraseña.</div>
-      </div>
-      <button type="submit" class="btn btn-success w-100">
-        <i class="bi bi-save"></i> Guardar Cambios
-      </button>
-      <a th:href="@{/admin/clientes/panel}" class="btn btn-secondary w-100 mt-2">Cancelar</a>
-    </form>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    (function() {
-      'use strict';
-      const forms = document.querySelectorAll('.needs-validation');
-      forms.forEach(form => {
-        form.addEventListener('submit', e => {
-          if (!form.checkValidity()) {
-            e.preventDefault(); e.stopPropagation();
-          }
-          form.classList.add('was-validated');
-        }, false);
-      });
-    })();
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Editar Cliente</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container mt-5" style="max-width: 500px;">
+      <h2 class="mb-4 text-center">Editar Cliente</h2>
+      <form th:action="@{/admin/clientes/formulario}" th:object="${cliente}" method="post" class="needs-validation" novalidate>
+        <input type="hidden" th:field="*{id}" />
+        <div class="mb-3">
+          <label class="form-label">Nombre</label>
+          <input th:field="*{nombre}" type="text" class="form-control" required />
+          <div class="invalid-feedback">Ingrese el nombre.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input th:field="*{email}" type="email" class="form-control" required />
+          <div class="invalid-feedback">Ingrese un email válido.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Contraseña</label>
+          <input th:field="*{clave}" type="password" class="form-control" required />
+          <div class="invalid-feedback">Ingrese la contraseña.</div>
+        </div>
+        <button type="submit" class="btn btn-success w-100">
+          <i class="bi bi-save"></i> Guardar Cambios
+        </button>
+        <a th:href="@{/admin/clientes/panel}" class="btn btn-secondary w-100 mt-2">Cancelar</a>
+      </form>
+    </div>
+    
+    <script>
+      (function() {
+        'use strict';
+        const forms = document.querySelectorAll('.needs-validation');
+        forms.forEach(form => {
+          form.addEventListener('submit', e => {
+            if (!form.checkValidity()) {
+              e.preventDefault(); e.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>

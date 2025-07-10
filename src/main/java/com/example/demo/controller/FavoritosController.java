@@ -45,7 +45,6 @@ public class FavoritosController {
 
     session.setAttribute("favoritos", favoritos);
 
-    // Redirige a la página de origen
     if ("index".equals(redirect)) {
         return "redirect:/";
     } else if ("juegos".equals(redirect)) {

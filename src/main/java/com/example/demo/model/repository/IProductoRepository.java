@@ -7,7 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 import com.example.demo.model.entity.Producto;
 
 public interface IProductoRepository extends CrudRepository<Producto, Long>{
-    // IProductoRepository.java
-List<Producto> findByCategoriaIgnoreCase(String categoria);
-    
+    List<Producto> findByCategoriaIgnoreCase(String categoria);    
 }

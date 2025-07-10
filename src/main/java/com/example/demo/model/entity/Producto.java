@@ -32,7 +32,7 @@ public class Producto implements Serializable {
     private String imagenNombre; 
 
     @Column(name = "categoria")
-    private String categoria; // <<<< CAMPO PARA CATEGORÍA
+    private String categoria;
 
     @Transient
     private int cantidad = 1;
@@ -95,7 +95,6 @@ public class Producto implements Serializable {
         this.cantidad = cantidad;
     }
 
-    // <<< FALTABA ESTO >>>
     public String getCategoria() {
         return categoria;
     }

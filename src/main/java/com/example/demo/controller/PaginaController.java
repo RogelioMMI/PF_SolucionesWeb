@@ -35,23 +35,7 @@ public class PaginaController {
     public String mostrarAcerca(){
         return "acerca";
     }
-    // @GetMapping("/joyeria")
-    // public String mostrarJoyerias(Model model){
-    //     model.addAttribute("productos", productoService.findByCategoriaIgnoreCase("joyeria"));
-    //     return "joyeria";
-    // }
 
-    // @GetMapping("/juegos")
-    // public String mostrarJuegos(Model model){
-    // model.addAttribute("productos", productoService.findByCategoriaIgnoreCase("juegos"));        
-    // return "juegos";
-    // }
-
-    // @GetMapping("/prendas")
-    // public String mostrarPrendas(Model model){
-    // model.addAttribute("productos", productoService.findByCategoriaIgnoreCase("prendas"));        
-    // return "prendas";
-    // }
     @GetMapping("/joyeria")
     public String mostrarJoyerias(HttpSession session, Model model) {
         model.addAttribute("productos", productoService.findByCategoriaIgnoreCase("joyeria"));
@@ -73,7 +57,6 @@ public class PaginaController {
         return "prendas";
     }
 
-    // Función modular para obtener los IDs de los productos favoritos
     private List<Long> obtenerFavoritosIds(HttpSession session) {
         @SuppressWarnings("unchecked")
         List<Producto> favoritos = (List<Producto>) session.getAttribute("favoritos");

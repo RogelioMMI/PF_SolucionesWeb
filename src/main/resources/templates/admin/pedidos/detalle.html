@@ -104,19 +104,18 @@
       </div>
     </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const modal = document.getElementById('editarDetalleModal');
-  modal.addEventListener('show.bs.modal', function (event) {
-    const button = event.relatedTarget;
-    document.getElementById('detalle-id').value = button.getAttribute('data-id');
-    document.getElementById('producto-select').value = button.getAttribute('data-producto-id');
-    document.getElementById('cantidad-input').value = button.getAttribute('data-cantidad');
-  });
-});
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.getElementById('editarDetalleModal');
+        modal.addEventListener('show.bs.modal', function (event) {
+          const button = event.relatedTarget;
+          document.getElementById('detalle-id').value = button.getAttribute('data-id');
+          document.getElementById('producto-select').value = button.getAttribute('data-producto-id');
+          document.getElementById('cantidad-input').value = button.getAttribute('data-cantidad');
+        });
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
   </body>
 </html>

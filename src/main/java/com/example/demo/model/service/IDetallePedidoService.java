@@ -8,4 +8,5 @@ public interface IDetallePedidoService {
     public List<DetallePedido> cargarDetallePedidos();
     public DetallePedido buscarDetallePedido(Long id);
     public String eliminarDetallePedido(Long id);
+    public void actualizarTotalPedido(DetallePedido detalle);
 }

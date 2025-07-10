@@ -110,28 +110,6 @@ public class ProductoController {
         return "redirect:/admin/productos/panel";
     }
 
-    @GetMapping("/catalogo")
-    public String mostrarCatalogo(Model model) {
-        List<Producto> productos = productoService.cargarProductos();
-
-        List<Producto> juegos = productos.stream()
-                .filter(p -> quitarTildes(p.getCategoria()).equals("juegos"))
-                .toList();
-
-        List<Producto> prendas = productos.stream()
-                .filter(p -> quitarTildes(p.getCategoria()).equals("prendas"))
-                .toList();
-
-        List<Producto> joyeria = productos.stream()
-                .filter(p -> quitarTildes(p.getCategoria()).equals("joyeria"))
-                .toList();
-
-        model.addAttribute("juegos", juegos);
-        model.addAttribute("prendas", prendas);
-        model.addAttribute("joyeria", joyeria);
-
-        return "cliente/index";
-    }
 
     @GetMapping("/juegos")
     public String verJuegos(Model model) {
